@@ -1,6 +1,6 @@
 # Backspace String Compare
 
-[Backspace String Compare - Leetcode](https://leetcode.com/problems/backspace-string-compare/description/)
+[Backspace String Compare - LeetCode](https://leetcode.com/problems/backspace-string-compare/description/)
 
 Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
 
@@ -13,4 +13,3 @@ Input: s = "ab#c", t = "ad#c"
 Output: true
 Explanation: Both s and t become "ac".
 ```
-

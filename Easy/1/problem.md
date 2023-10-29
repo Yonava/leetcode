@@ -1,6 +1,6 @@
 # Two Sum
 
-[Link](https://leetcode.com/problems/two-sum/)
+[Two Sum - LeetCode](https://leetcode.com/problems/two-sum/)
 
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 

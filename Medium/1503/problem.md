@@ -10,7 +10,7 @@ When an ant reaches one end of the plank at a time t, it falls out of the plank 
 
 Given an integer n and two integer arrays left and right, the positions of the ants moving to the left and the right, return the moment when the last ant(s) fall out of the plank.
 
-![Alt text](image.png)
+![Alt text](https://assets.leetcode.com/uploads/2020/06/17/ants.jpg)
 
 **Example:**
 

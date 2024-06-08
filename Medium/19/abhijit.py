@@ -23,3 +23,11 @@ class Solution:
         
         p2.next = p2.next.next
         return head
+    
+'''
+optimal solution adds a dumy node to the front.
+Left pointer at dummy node
+right pointer is shifted to n + 1
+shift L and R until R is null
+then just do the pointer manipulation for deletion
+'''

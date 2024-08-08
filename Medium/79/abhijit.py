@@ -15,8 +15,6 @@ class Solution:
                 new_pos = (pos[0] + d[0], pos[1] + d[1])
                 if (0 <= new_pos[0] < len(board) and 0 <= new_pos[1] < len(board[0]) and
                         new_pos not in seen and board[new_pos[0]][new_pos[1]] == word[curr_index]):
-                    if curr_index + 1 == len(word):
-                        return True
                     seen.add(new_pos)
                     if self.bfs(new_pos, curr_index + 1, word, board, seen):
                         return True

@@ -8,3 +8,7 @@ class Solution:
                 heapq.heappop(heap)
         
         return heap[0]
+    
+"""
+The idea is that we maintain a window of a heap of size k and we move it through the remaining list
+"""

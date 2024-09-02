@@ -1,33 +1,24 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        ways = [0]
+        memo = [-1] * (n + 1)
+        def recurHelper(curr):
+            if curr == 0:
+                memo[0] = 1
+                return 1
+            elif curr < 0:
+                return 0
+            elif memo[curr] != -1:
+                return memo[curr]
 
-        def climb(number):
-            if number == 2:
-                ways[0] += 2
-                return
-            if number == 1:
-                ways[0] + 1
-                return
+            n_min_one = recurHelper(curr - 1)
+            n_min_two = recurHelper(curr - 2)
             
+            memo[curr] = n_min_one + n_min_two
             
-            climb(number - 1)
-            climb(number - 2)
-        
-        climb(n)
-        return ways[0]
+            return n_min_one + n_min_two
+            
+        recurHelper(n)
 
-class Solution:
-    def climbStairs(self, n: int) -> int:
-        if n <= 2:
-            return n
+        return memo[-1]
+            
 
-        prev1 = 1
-        prev2 = 2
-        current = 0
-        for i in range(2,n):
-            current = prev1 + prev2
-            prev1 = prev2
-            prev2 = current
-        
-        return current

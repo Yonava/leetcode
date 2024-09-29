@@ -1,0 +1,27 @@
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        all_paths = []
+        
+        def recurHelper(node, currentPath, currentSum):
+            if not node:
+                return
+            
+            # Add current node to the path
+            currentPath.append(node.val)
+            currentSum += node.val
+
+            # Check if we're at a leaf node and the sum equals targetSum
+            if not node.left and not node.right and currentSum == targetSum:
+                all_paths.append(currentPath.copy())  # Append a copy of the current path
+
+            # Continue searching in left and right subtrees
+            recurHelper(node.left, currentPath, currentSum)
+            recurHelper(node.right, currentPath, currentSum)
+            
+            # Backtrack by removing the current node from the path
+            currentPath.pop()
+
+        # Start the recursion with an empty path and sum 0
+        recurHelper(root, [], 0)
+        
+        return all_paths

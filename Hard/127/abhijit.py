@@ -1,38 +1,47 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        def checkValidDifference(word1, word2):
-            changes = 0
-            ptr = 0
-            while ptr < len(word1):
-                if word1[ptr] != word2[ptr]:
-                    changes +=1
-                ptr +=1
-            return True if changes == 1 else False
+        wordList.append(beginWord)
+        def checkDifference(s1,s2):
+            count = 0
+            for i in range(len(s1)):
+                if s1[i] != s2[i]:
+                    count +=1
+            return count == 1
         
-        min_words = float("inf")
-        def dfs(begin,end,currChain,words):
-            nonlocal min_words
-            print('currentwords',words)
-            if begin == end:
-                min_words = min(currChain,min_words)
-                return 
-            
-            one_diff = set()
-
-            for word in words:
-                if checkValidDifference(begin,word):
-                    one_diff.add(word)
-
-            for word in one_diff:
-                dfs(word,end,currChain +1, words.difference(one_diff))
-            
-        if endWord not in wordList:
-            return 0
-        dfs(beginWord,endWord,1,set(wordList))
-        return 0 if min_words == float("inf") else min_words
-
-
-            
-    
-            
+        graph = {}
         
+        
+        for i in range(len(wordList)):
+            graph[wordList[i]] = []
+
+        for i in range(len(wordList)):
+            for j in range(i + 1, len(wordList)):
+                if checkDifference(wordList[i], wordList[j]):
+                    graph[wordList[i]].append(wordList[j])
+                    graph[wordList[j]].append(wordList[i])  # this makes it undirected
+
+        seen = set()
+        def bfs(start):
+            nonlocal seen, graph
+            q = deque()
+            q.append(start)
+            count = 0
+            while q:
+                count += 1
+                for i in range(len(q)):
+                    curr = q.popleft()
+                    if curr == endWord:
+                        return count
+                    if curr not in seen:
+                        for neighbour in graph[curr]:
+                            if neighbour not in seen:
+                                q.append(neighbour)
+                        seen.add(curr)
+            return -1
+
+        count = bfs(beginWord)
+        if count > 0:
+            return count
+        return 0
+        
+                

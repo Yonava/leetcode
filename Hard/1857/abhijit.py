@@ -7,11 +7,9 @@ class Solution:
 
         # Build graph and in-degree count
         graph = defaultdict(list)
-        in_degree_count = {i: 0 for i in range(len(colors))}
 
         for src, dst in edges:
             graph[src].append(dst)
-            in_degree_count[dst] += 1
 
         seen_nodes = {}  # memoization
         visiting = set()  # for cycle detection

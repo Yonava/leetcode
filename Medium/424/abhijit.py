@@ -1,36 +1,24 @@
 class Solution:
-    def findNextDiff(self,original,s,lowerBound,upperBound):
-        x = lowerBound
-        while x <= upperBound:
-            if s[x] != original:
-                return x
-            else:
-                x +=1
-
     def characterReplacement(self, s: str, k: int) -> int:
-        l,r = 0,0
-        count = k
-        next_pointer = 0
-        longest_sub = 0
-        while r < len(s):
-            print("str parsed l,r", l,r,s[l:r])
-            print("k", count)
-            if s[l] == s[r]:
-                r +=1
-            else:
-                if count == k:
-                    r += 1
-                    count -= 1
-                elif count > 0:
-                    count -= 1
-                    r += 1
-                else:
-                    longest_sub = max(longest_sub, (r-l))
-                    print("r",r)
-                    l = self.findNextDiff(s[l],s,l,r)
-                    # r += 1
-                    count = k - (r -l)
-        print("str parsed l,r", l,r,s[l:r])
-        print("k", count)
-        longest_sub = max(longest_sub, (r-l))
-        return longest_sub
+      max_length = 0
+      frequency_map = {}
+      start, end = 0,0 
+      # the frequency trackler is  a neat trick where we can quikcly check what is the most frequently appearing character and then calculated k_used (dynamic) instead of the usual static count
+      while end < len(s):
+        if s[end] not in frequency_map:
+          frequency_map[s[end]] = 0
+
+        frequency_map[s[end]] += 1
+
+        while (end - start + 1) -  max(frequency_map.values()) > k:
+          if frequency_map[s[start]] == 1:
+            del frequency_map[s[start]] 
+          else:
+            frequency_map[ss[start]] -= 1
+
+          start += 1
+
+        end += 1
+      
+        max_length = max(max_length, end - start)
+      return max_length 

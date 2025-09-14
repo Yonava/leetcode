@@ -14,7 +14,7 @@ class Solution:
             right_skip, right_pick = optimiseSearch(root.right)
             
             root_pick = left_skip + root.val + right_skip
-            root_skip = max(left_pick + right_pick, left_skip + right_skip, left_pick + right_skip, left_skip + right_pick)
+            root_skip = max(left_skip, left_pick) + max(right_skip, right_pick)
             return (root_skip, root_pick)
 
         r_s, r_p = optimiseSearch(root)

@@ -1,28 +1,31 @@
 class Solution:
-   ''' we use the intuition of the substring until index j
-   opt(len(s)) == True
-   opt(j) = opt(j+len(vj)) or opt(j)'''
-   
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        memo = {} 
+        """
+        The idea here is that if we have reached a certain index
+        we want to proceed from there.
+        """
 
-        def findSubString(j):
-            if j == len(s): 
+
+        wordSet = set(wordDict)
+    
+        tracker = {}
+        def find(prev, current):
+            if current > len(s):
+                return False
+            if current == len(s):
                 return True
-            if j in memo:  
-                return memo[j]
+            
+            if (prev,current) in tracker:
+                return tracker[(prev,current)]
 
-            returnVal = False
-            for w in wordDict:
-                
-                if s[j: j + len(w)] == w:
-                   
-                    val = findSubString(j + len(w))
-                    returnVal = val or returnVal
-                    if returnVal: 
-                        break
-
-            memo[j] = returnVal  
-            return returnVal
-
-        return findSubString(0)
+            for w in wordSet:
+                if s[current:current + len(w)] == w:
+                    found = find(current,current + len(w))
+                    if found:
+                        tracker[(prev,current)] = True
+                        return True
+            
+            tracker[(prev,current)] = False
+            return False
+            
+        return find(-1,0)
